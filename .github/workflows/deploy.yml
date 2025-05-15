@@ -1,0 +1,23 @@
+name: Deploy to hodi.host via SFTP
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy via SFTP
+        uses: pressidium/lftp-mirror-action@v1
+        with:
+          host: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          privateKey: ${{ secrets.SFTP_PRIVATE_KEY }}
+          localDir: .
+          remoteDir: ${{ secrets.SFTP_REMOTE_PATH }}
