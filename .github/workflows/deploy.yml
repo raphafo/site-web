@@ -13,13 +13,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy via SFTP
-        uses: pressidium/lftp-mirror-action@v1
+      - name: Deploy using SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          host: ${{ secrets.SFTP_HOST }}
-          user: ${{ secrets.SFTP_USERNAME }}
-          privateKey: ${{ secrets.SFTP_PRIVATE_KEY }}
-          localDir: .
-          remoteDir: ${{ secrets.SFTP_REMOTE_PATH }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          server: ${{ secrets.SFTP_HOST }}
+          ssh_private_key: ${{ secrets.SFTP_PRIVATE_KEY }}
+          local_path: "./"
+          remote_path: ${{ secrets.SFTP_REMOTE_PATH }}
+          port: "22"
+
 
 
